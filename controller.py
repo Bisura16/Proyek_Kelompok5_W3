@@ -2,15 +2,14 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
 from scraper import scrape_headlines
 from exporter import handle_export
 
-
 class Controller:
     def __init__(self):
         from main_window import MainWindow
         self.view = MainWindow()
 
-        # Koneksi tombol ke fungsi
+        # Koneksi tombol ke fungsi (Tugas Anggota 3)
         self.view.scrape_button.clicked.connect(self.handle_scrape)
-        self.view.export_button.clicked.connect(self.handle_export)  # Anggota 4
+        self.view.export_button.clicked.connect(self.handle_export)  # ← dari branch kamu
 
         self.view.show()
 
@@ -40,7 +39,6 @@ class Controller:
             self.view.status_label.setText(f"Status: Berhasil (Total: {len(data)})")
 
         except Exception as e:
-            # Handle error request atau timeout
             QMessageBox.critical(self.view, "Error", f"Gagal: {str(e)}")
             self.view.status_label.setText("Status: Error")
 
