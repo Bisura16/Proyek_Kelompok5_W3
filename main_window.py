@@ -1,10 +1,10 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLineEdit, QPushButton, QTableWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QTableWidget, QLabel
 
 app = QApplication(sys.argv)  # membuat aplikasi
 
 window = QMainWindow()  # membuat window
-window.setWindowTitle("Berita")  # memberi judul
+window.setWindowTitle("Berita")  # memberi judul web
 
 # membuat central widget
 central_widget = QWidget()
@@ -14,26 +14,37 @@ window.setCentralWidget(central_widget)
 layout = QVBoxLayout()
 central_widget.setLayout(layout)
 
+#membuat judul aplikasi
+title_label = QLabel("Web Scraping Judul Berita")
+title_label.setStyleSheet("font-size:18px; font-weight:bold;")
+layout.addWidget(title_label)
+
 # membuat input URL
 url_input = QLineEdit()
 url_input.setPlaceholderText("Masukkan URL berita...")
+layout.addWidget(url_input)
 
-#membuat tombol scrape
+
+#membuat tombol scrape dan export
+button_layout = QHBoxLayout()
 scrape_button = QPushButton("Scrape")
-layout.addWidget(scrape_button)
-
-#membuat tombol export
 export_button = QPushButton("Export")
-layout.addWidget(export_button)
+button_layout.addWidget(scrape_button)
+button_layout.addWidget(export_button)
+layout.addLayout(button_layout)
+scrape_button.setStyleSheet("background-color: #4CAF50; color: white;")
+export_button.setStyleSheet("background-color: #2196F3; color: white;")
 
 #membuat tabel
 table = QTableWidget()
-table.setColumnCount(3)
-table.setHorizontalHeaderLabels(["No", "Judul", "Link"])
+table.setColumnCount(4)
+table.setHorizontalHeaderLabels(["No", "Judul", "Tanggal", "Link"])
+table.horizontalHeader().setStretchLastSection(True)
 layout.addWidget(table)
 
-# memasukkan input ke layout
-layout.addWidget(url_input)
+#membuat status label
+status_label = QLabel("Status: Siap")
+layout.addWidget(status_label)
 
 # menampilkan window
 window.show()
