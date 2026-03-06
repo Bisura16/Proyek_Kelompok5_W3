@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
-from scraper import scrape_headlines # Fungsi Anggota 2 [cite: 11]
+from contohscraper import scrape_headlines # Fungsi Anggota 2 [cite: 11]
 
 class Controller:
     def __init__(self):
@@ -20,7 +20,7 @@ class Controller:
             return
 
         try:
-            self.view.status_label.setText("Status: Sedang memproses...") [cite: 8, 20]
+            self.view.status_label.setText("Status: Sedang memproses...") 
             
             # Panggil mesin scraper [cite: 11, 17]
             data = scrape_headlines(url)
@@ -33,7 +33,7 @@ class Controller:
                 self.view.table.setItem(row, 1, QTableWidgetItem(item.get("judul", "")))
                 self.view.table.setItem(row, 3, QTableWidgetItem(item.get("link", "")))
             
-            self.view.status_label.setText(f"Status: Berhasil (Total: {len(data)})") [cite: 8]
+            self.view.status_label.setText(f"Status: Berhasil (Total: {len(data)})") 
             
         except Exception as e:
             # Handle error request atau timeout [cite: 19, 20]
