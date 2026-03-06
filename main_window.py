@@ -1,28 +1,31 @@
+
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QTableWidget, QLabel
 
-app = QApplication(sys.argv)  # membuat aplikasi
-
-window = QMainWindow()  # membuat window
-window.setWindowTitle("Berita")  # memberi judul web
-
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Berita")
+        self.resize(600, 400)
+#Bagian memuat aplikasi dipindahkan ke controller.py (Anggota 3)
+app = QApplication(sys.argv)
 # membuat central widget
-central_widget = QWidget()
-window.setCentralWidget(central_widget)
+self.central_widget = QWidget()
+self.setCentralWidget(self.central_widget)
 
 # membuat layout
-layout = QVBoxLayout()
-central_widget.setLayout(layout)
+self.layout = QVBoxLayout()
+self.central_widget.setLayout(self.layout)
 
 #membuat judul aplikasi
-title_label = QLabel("Web Scraping Judul Berita")
-title_label.setStyleSheet("font-size:18px; font-weight:bold;")
-layout.addWidget(title_label)
+self.title_label = QLabel("Web Scraping Judul Berita")
+self.title_label.setStyleSheet("font-size:18px; font-weight:bold;")
+self.layout.addWidget(self.title_label)
 
 # membuat input URL
-url_input = QLineEdit()
-url_input.setPlaceholderText("Masukkan URL berita...")
-layout.addWidget(url_input)
+self.url_input = QLineEdit()
+self.url_input.setPlaceholderText("Masukkan URL berita...")
+self.layout.addWidget(self.url_input)
 
 
 #membuat tombol scrape dan export
@@ -31,20 +34,22 @@ scrape_button = QPushButton("Scrape")
 export_button = QPushButton("Export")
 button_layout.addWidget(scrape_button)
 button_layout.addWidget(export_button)
-layout.addLayout(button_layout)
-scrape_button.setStyleSheet("background-color: #4CAF50; color: white;")
-export_button.setStyleSheet("background-color: #2196F3; color: white;")
+self.layout.addLayout(button_layout)
+self.scrape_button = scrape_button
+self.export_button = export_button
+self.scrape_button.setStyleSheet("background-color: #4CAF50; color: white;")
+self.export_button.setStyleSheet("background-color: #2196F3; color: white;")
 
 #membuat tabel
-table = QTableWidget()
-table.setColumnCount(4)
-table.setHorizontalHeaderLabels(["No", "Judul", "Tanggal", "Link"])
-table.horizontalHeader().setStretchLastSection(True)
-layout.addWidget(table)
+self.table = QTableWidget()
+self.table.setColumnCount(4)
+self.table.setHorizontalHeaderLabels(["No", "Judul", "Tanggal", "Link"])
+self.table.horizontalHeader().setStretchLastSection(True)
+self.layout.addWidget(self.table)
 
 #membuat status label
-status_label = QLabel("Status: Siap")
-layout.addWidget(status_label)
+self.status_label = QLabel("Status: Siap")
+self.layout.addWidget(self.status_label)
 
 # menampilkan window
 window.show()
