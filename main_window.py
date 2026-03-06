@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLineEdit, QPushButton
 
 app = QApplication(sys.argv)  # membuat aplikasi
 
@@ -17,6 +17,14 @@ central_widget.setLayout(layout)
 # membuat input URL
 url_input = QLineEdit()
 url_input.setPlaceholderText("Masukkan URL berita...")
+
+#membuat tombol scrape
+scrape_button = QPushButton("Scrape")
+layout.addWidget(scrape_button)
+
+#membuat tombol export
+export_button = QPushButton("Export")
+layout.addWidget(export_button)
 
 # memasukkan input ke layout
 layout.addWidget(url_input)
