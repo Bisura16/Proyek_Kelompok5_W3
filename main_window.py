@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLineEdit, QPushButton, QTableWidget
 
 app = QApplication(sys.argv)  # membuat aplikasi
 
@@ -25,6 +25,12 @@ layout.addWidget(scrape_button)
 #membuat tombol export
 export_button = QPushButton("Export")
 layout.addWidget(export_button)
+
+#membuat tabel
+table = QTableWidget()
+table.setColumnCount(3)
+table.setHorizontalHeaderLabels(["No", "Judul", "Link"])
+layout.addWidget(table)
 
 # memasukkan input ke layout
 layout.addWidget(url_input)
