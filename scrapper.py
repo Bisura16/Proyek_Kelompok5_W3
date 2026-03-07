@@ -5,6 +5,35 @@ import requests
 from bs4 import BeautifulSoup
 
 
+def get_site_selectors(url):
+    """Menentukan selector HTML berdasarkan situs yang di-scrape."""
+    if "detik.com" in url:
+        return {"tag": "article", "sub": "a"}
+    elif "kompas.com" in url:
+        return {"tag": "h3", "sub": "a"}
+    elif "cnnindonesia.com" in url:
+        return {"tag": "article", "sub": "a"}
+    else:
+        # Default: cari semua tag <article> dengan <a>
+        return {"tag": "article", "sub": "a"}
+
+
+def parse_headlines(soup, selectors):
+    """Parsing headline dari HTML berdasarkan selector."""
+    elements = soup.find_all(selectors["tag"])
+    headlines = []
+
+    for el in elements:
+        link_tag = el.find(selectors["sub"])
+        if link_tag:
+            judul = link_tag.get_text(strip=True)
+            link = link_tag.get("href", "")
+            if judul:
+                headlines.append({"judul": judul, "link": link})
+
+    return headlines
+
+
 def scrape_headlines(url):
     """
     Fungsi utama untuk scraping headline berita.
@@ -43,17 +72,9 @@ def scrape_headlines(url):
     html = response.text
     soup = BeautifulSoup(html, "html.parser")
 
-    # Parsing untuk detik.com
-    articles = soup.find_all("article")
-    headlines = []
-
-    for article in articles:
-        link_tag = article.find("a")
-        if link_tag:
-            judul = link_tag.get_text(strip=True)
-            link = link_tag.get("href", "")
-            if judul:
-                headlines.append({"judul": judul, "link": link})
+    # Ambil selector berdasarkan situs
+    selectors = get_site_selectors(url)
+    headlines = parse_headlines(soup, selectors)
 
     # Tambahkan nomor urut
     result = []
