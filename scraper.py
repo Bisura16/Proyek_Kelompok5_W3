@@ -7,11 +7,26 @@ from bs4 import BeautifulSoup
 
 
 def extract_date(article):
-    """Ambil tanggal dari elemen article."""
+    """Ambil tanggal dari elemen article dengan beberapa fallback."""
     # Cari tag <time> yang umum dipakai situs berita
     time_tag = article.find("time")
     if time_tag:
         return time_tag.get("datetime", time_tag.get_text(strip=True))
+
+    # Fallback: cari elemen dengan class yang mengandung kata 'date' atau 'time'
+    date_classes = ["date", "time", "timestamp", "media__date"]
+    for cls in date_classes:
+        date_el = article.find(class_=lambda c: c and cls in c.lower())
+        if date_el:
+            return date_el.get_text(strip=True)
+
+    # Fallback: cari <span> di dalam article yang teksnya mengandung pola tanggal
+    spans = article.find_all("span")
+    for span in spans:
+        text = span.get_text(strip=True)
+        if any(bulan in text.lower() for bulan in ["jan", "feb", "mar", "apr", "mei", "jun",
+                                                     "jul", "agu", "sep", "okt", "nov", "des"]):
+            return text
 
     return "-"
 
