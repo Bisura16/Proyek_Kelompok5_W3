@@ -6,9 +6,15 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def extract_date(article):
+def extract_date(article, date_selector=None):
     """Ambil tanggal dari elemen article dengan beberapa fallback."""
-    # Cari tag <time> yang umum dipakai situs berita
+    # Prioritas 1: pakai selector spesifik per situs jika ada
+    if date_selector:
+        date_el = article.find(class_=date_selector)
+        if date_el:
+            return date_el.get_text(strip=True)
+
+    # Prioritas 2: cari tag <time>
     time_tag = article.find("time")
     if time_tag:
         return time_tag.get("datetime", time_tag.get_text(strip=True))
@@ -39,16 +45,16 @@ def get_site_selectors(url):
         url (str): URL situs berita
 
     Return:
-        dict: selector dengan key 'tag' dan 'sub'
+        dict: selector dengan key 'tag', 'sub', dan 'date_class'
     """
     if "detik.com" in url:
-        return {"tag": "article", "sub": "a"}
+        return {"tag": "article", "sub": "a", "date_class": "media__date"}
     elif "kompas.com" in url:
-        return {"tag": "h3", "sub": "a"}
+        return {"tag": "h3", "sub": "a", "date_class": "article__date"}
     elif "cnnindonesia.com" in url:
-        return {"tag": "article", "sub": "a"}
+        return {"tag": "article", "sub": "a", "date_class": "date"}
     else:
-        return {"tag": "article", "sub": "a"}
+        return {"tag": "article", "sub": "a", "date_class": None}
 
 
 def parse_headlines(soup, selectors):
@@ -63,6 +69,7 @@ def parse_headlines(soup, selectors):
         list of dict: daftar headline dengan key 'judul', 'link', dan 'tanggal'
     """
     elements = soup.find_all(selectors["tag"])
+    date_class = selectors.get("date_class")
     headlines = []
 
     for el in elements:
@@ -70,7 +77,7 @@ def parse_headlines(soup, selectors):
         if link_tag:
             judul = link_tag.get_text(strip=True)
             link = link_tag.get("href", "")
-            tanggal = extract_date(el)
+            tanggal = extract_date(el, date_class)
             if judul:
                 headlines.append({"judul": judul, "link": link, "tanggal": tanggal})
 
@@ -120,7 +127,6 @@ def scrape_headlines(url):
     selectors = get_site_selectors(url)
     headlines = parse_headlines(soup, selectors)
 
-    # Tambahkan nomor urut dan sertakan tanggal
     result = []
     for i, item in enumerate(headlines, start=1):
         result.append({
