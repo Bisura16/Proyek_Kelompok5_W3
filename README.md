@@ -51,6 +51,9 @@ Untuk menjalankan aplikasi ini, pastikan perangkat yang akan digunakan mempunyai
 3. Tampilan hasil scraping berita
    <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/716439fa-2547-4e44-a1a1-33b6904faa8c" />
 
+4. Hasil scraping yang diekspor menjadi file.csv
+   <img width="1920" height="1200" alt="Cuplikan layar 2026-03-07 204648" src="https://github.com/user-attachments/assets/6e653b34-15e5-4112-a0cc-167da3b31050" />
+
 
 
 
