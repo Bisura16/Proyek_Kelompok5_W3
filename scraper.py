@@ -20,7 +20,7 @@ def extract_date(article):
         if date_el:
             return date_el.get_text(strip=True)
 
-    # Fallback: cari <span> di dalam article yang teksnya mengandung pola tanggal
+    # Fallback: cari <span> yang teksnya mengandung nama bulan
     spans = article.find_all("span")
     for span in spans:
         text = span.get_text(strip=True)
@@ -60,7 +60,7 @@ def parse_headlines(soup, selectors):
         selectors (dict): selector HTML dari get_site_selectors()
 
     Return:
-        list of dict: daftar headline dengan key 'judul' dan 'link'
+        list of dict: daftar headline dengan key 'judul', 'link', dan 'tanggal'
     """
     elements = soup.find_all(selectors["tag"])
     headlines = []
@@ -70,8 +70,9 @@ def parse_headlines(soup, selectors):
         if link_tag:
             judul = link_tag.get_text(strip=True)
             link = link_tag.get("href", "")
+            tanggal = extract_date(el)
             if judul:
-                headlines.append({"judul": judul, "link": link})
+                headlines.append({"judul": judul, "link": link, "tanggal": tanggal})
 
     return headlines
 
@@ -87,7 +88,7 @@ def scrape_headlines(url):
         url (str): URL situs berita yang akan di-scrape
 
     Return:
-        list of dict: [{"no": 1, "judul": "...", "link": "..."}]
+        list of dict: [{"no": 1, "judul": "...", "tanggal": "...", "link": "..."}]
 
     Raises:
         ValueError: Jika URL kosong atau format tidak valid
@@ -119,11 +120,13 @@ def scrape_headlines(url):
     selectors = get_site_selectors(url)
     headlines = parse_headlines(soup, selectors)
 
+    # Tambahkan nomor urut dan sertakan tanggal
     result = []
     for i, item in enumerate(headlines, start=1):
         result.append({
             "no": i,
             "judul": item["judul"],
+            "tanggal": item["tanggal"],
             "link": item["link"]
         })
 
