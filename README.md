@@ -1,13 +1,14 @@
 # PROYEK_KELOMPOK 5_W3
 
-```
-KELOMPOK 5 (1B - D4 TEKNIK INFORMATIKA)
-Anggota : 1. Bimo Surya Anggara (251524040)
-          2. Ghaisan Khoirul Badruzaman (251524048)
-          3. Abhidal Muhammad Gazza (251524032)
-          4. Muhammad Iqbal (251524057) 
-          5. Alia Ardani(251524035)
-```
+| No | Nama                         | NIM       | GitHub           |
+|----|------------------------------|-----------|------------------|
+| 1  | Bimo Surya Anggara           | 251524040 | Bisura16         |
+| 2  | Ghaisan Khoirul Badruzaman   | 251524048 | Ghaisank         |
+| 3  | Abhidal Muhammad Gazza       | 251524032 | AbhidalMG        |
+| 4  | Muhammad Iqbal               | 251524057 | Ballvoldigoad    |
+| 5  | Alia Ardani                  | 251524035 | vssixla          |
+
+
 ## APLIKASI SCRAPING BERITA DENGAN GUI (SELENIUM)
 Aplikasi ini merupakan program web scraping berita berbasis desktop yang dibuat menggunakan bahasa pemrograman Python dengan memanfaatkan beberapa library, yaitu PyQt5 sebagai antarmuka grafis (GUI), requests untuk melakukan HTTP request ke website, BeautifulSoup4 untuk melakukan parsing HTML, serta pandas atau csv untuk mengekspor data ke dalam format CSV.
 
@@ -15,15 +16,33 @@ Aplikasi ini memungkinkan pengguna untuk memasukkan URL halaman berita, kemudian
 
 ## SISTEM UNTUK MENJALANKAN PROGRAM 
 Berikut ini library yang dapat digunakan untuk menjalankan aplikasi ini: 
-- Python
-- PyQt5
-- Requests
-- BeautifulSoup4
-- Pandas atau CSV Module
+- Python, digunakan sebagai bahasa pemrograman utama untuk membangun dan menjalankan seluruh fungsi aplikasi
+- PyQt5, digunakan untuk membuat antarmuka grafis (GUI) sehingga pengguna dapat berinteraksi dengan aplikasi.
+- Requests, digunakan untuk mengambil data halaman web melalui HTTP request.
+- BeautifulSoup4, digunakan untuk memproses dan mengekstrak informasi dari struktur HTML halaman web.
+- CSV Module, digunakan untuk menyimpan hasil scraping ke dalam file berformat CSV. Modul ini merupakan modul bawaan Python sehingga tidak memerlukan instalasi tambahan
 
+## CARA UNTUK MENJALANKAN APLIKASI
+Untuk menjalankan aplikasi ini, pastikan perangkat yang akan digunakan mempunyai bahasa pemrograman python
+1. Clone repository ini ke komputer lokal (Command Prompt, Git Bash, dll)
+   ```
+   git clone https://github.com/Bisura16/Proyek_Kelompok5_W3.git
+   ```
+2. Masuk ke root repositori ini
+   ```
+   cd Proyek_Kelompok5_W3
+   ```
+4. Install library yang diperlukan menggunakan file requirements.txt
+   ```
+   pip install -r requirements.txt
+   ```
+5. Setelah semua terinstall, jalankan aplikasi ini
+   ```
+   python main_window.py
+   ```
+   
 ## TAMPILAN APLIKASI 
 
-## CARA UNUTK MENJALANKAN APLIKASI
 
 
 
