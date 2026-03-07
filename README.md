@@ -42,6 +42,17 @@ Untuk menjalankan aplikasi ini, pastikan perangkat yang akan digunakan mempunyai
    ```
    
 ## TAMPILAN APLIKASI 
+1. Halaman utama Aplikasi
+   <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/40ffac89-fe6c-4d38-9654-03009a87d844" />
+
+2. Melampirkan tautan berita yang akan discraping
+   <img width="1915" height="334" alt="image" src="https://github.com/user-attachments/assets/73ca1742-05d9-450c-b33e-e6b779261cc5" />
+
+3. Tampilan hasil scraping berita
+   <img width="1920" height="1200" alt="image" src="https://github.com/user-attachments/assets/716439fa-2547-4e44-a1a1-33b6904faa8c" />
+
+4. Hasil scraping yang diekspor menjadi file.csv
+   <img width="1920" height="1200" alt="Cuplikan layar 2026-03-07 204648" src="https://github.com/user-attachments/assets/6e653b34-15e5-4112-a0cc-167da3b31050" />
 
 
 
